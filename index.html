@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For You 💗</title>
+
+<style>
+body {
+  text-align: center;
+  font-family: 'Comic Sans MS', cursive;
+  background: #ffe4ec; /* baby pink */
+}
+
+h1 {
+  margin-top: 40px;
+  color: #d63384;
+}
+
+#cake {
+  font-size: 90px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+#photos {
+  display: none;
+  margin-top: 30px;
+}
+
+/* 🌸 flower frame effect */
+.photo-frame {
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 0 10px pink;
+  position: relative;
+}
+
+.photo-frame::before {
+  content: "🌸 🌼 🌸";
+  position: absolute;
+  top: -20px;
+  left: 10px;
+  font-size: 18px;
+}
+
+img {
+  width: 130px;
+  border-radius: 10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Happy 1 Month 💗</h1>
+
+<p>Tap the cake and blow the candles 🎂</p>
+
+<!-- chocolate + strawberry vibe cake -->
+<div id="cake" onclick="blowCandles()">🎂🍓</div>
+
+<div id="photos">
+  <h2>my favorite moments so far 🤍</h2>
+
+  <div class="photo-frame">
+    <img src="photo1.jpg">
+  </div>
+
+  <div class="photo-frame">
+    <img src="photo2.jpg">
+  </div>
+
+  <div class="photo-frame">
+    <img src="photo3.jpg">
+  </div>
+
+</div>
+
+<script>
+function blowCandles() {
+  document.getElementById("cake").innerHTML = "🎂💨";
+  setTimeout(() => {
+    document.getElementById("photos").style.display = "block";
+  }, 1500);
+}
+</script>
+
+</body>
+</html>
