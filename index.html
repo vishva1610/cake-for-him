@@ -5,51 +5,98 @@
 
 <style>
 body {
+  margin: 0;
   text-align: center;
   font-family: 'Comic Sans MS', cursive;
-  background: #ffe4ec; /* baby pink */
+  background: linear-gradient(#ffe4ec, #fff);
 }
 
 h1 {
-  margin-top: 40px;
+  margin-top: 30px;
   color: #d63384;
 }
 
+/* Cake */
 #cake {
-  font-size: 90px;
+  width: 260px;
+  margin-top: 40px;
   cursor: pointer;
-  margin-top: 30px;
+  transition: 0.5s;
 }
 
-#photos {
+.hide {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+/* Countdown */
+#countdown {
+  font-size: 60px;
+  color: #ff4d6d;
+  margin-top: 20px;
+}
+
+/* Final section */
+#final {
   display: none;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
-/* 🌸 flower frame effect */
-.photo-frame {
+/* Photo frames */
+.frame {
   display: inline-block;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 15px;
-  background: #fff;
-  box-shadow: 0 0 10px pink;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 25px;
+  background: white;
+  box-shadow: 0 0 30px pink;
   position: relative;
 }
 
-.photo-frame::before {
-  content: "🌸 🌼 🌸";
+/* Flower borders */
+.frame::before {
+  content: "🌸🌼🌸🌼🌸🌼🌸🌼";
   position: absolute;
-  top: -20px;
+  top: -25px;
   left: 10px;
-  font-size: 18px;
+  font-size: 20px;
+}
+.frame::after {
+  content: "🌸🌼🌸🌼🌸🌼🌸🌼";
+  position: absolute;
+  bottom: -25px;
+  left: 10px;
+  font-size: 20px;
 }
 
-img {
-  width: 130px;
-  border-radius: 10px;
+/* Images */
+.frame img {
+  width: 220px;
+  border-radius: 15px;
 }
 
+/* Message */
+#line {
+  font-size: 22px;
+  margin-top: 25px;
+  color: #d63384;
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: pink;
+  top: 0;
+  animation: fall 3s linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
 </style>
 </head>
 
@@ -57,34 +104,65 @@ img {
 
 <h1>Happy 1 Month 💗</h1>
 
-<p>Tap the cake and blow the candles 🎂</p>
+<p>Tap the cake 🎂</p>
 
-<!-- chocolate + strawberry vibe cake -->
-<div id="cake" onclick="blowCandles()">🎂🍓</div>
+<img id="cake" src="cake.png" onclick="startCountdown()">
 
-<div id="photos">
-  <h2>my favorite moments so far 🤍</h2>
+<div id="countdown"></div>
 
-  <div class="photo-frame">
-    <img src="photo1.jpg">
+<div id="final">
+
+  <div class="frame">
+    <img src="photo1.jpg.jpeg">
   </div>
 
-  <div class="photo-frame">
-    <img src="photo2.jpg">
+  <div class="frame">
+    <img src="photo2.jpg.jpeg">
   </div>
 
-  <div class="photo-frame">
-    <img src="photo3.jpg">
+  <div class="frame">
+    <img src="photo3.jpg.jpeg">
+  </div>
+
+  <div id="line">
+    can’t wait to recreate this in real life 💗
   </div>
 
 </div>
 
 <script>
-function blowCandles() {
-  document.getElementById("cake").innerHTML = "🎂💨";
-  setTimeout(() => {
-    document.getElementById("photos").style.display = "block";
-  }, 1500);
+function startCountdown() {
+  let count = 3;
+  let cd = document.getElementById("countdown");
+  let cake = document.getElementById("cake");
+
+  let interval = setInterval(() => {
+    cd.innerHTML = count;
+    count--;
+
+    if (count < 0) {
+      clearInterval(interval);
+      cd.innerHTML = "💨";
+
+      cake.classList.add("hide");
+
+      setTimeout(() => {
+        cake.style.display = "none";
+        document.getElementById("final").style.display = "block";
+        createConfetti();
+      }, 800);
+    }
+  }, 1000);
+}
+
+function createConfetti() {
+  for (let i = 0; i < 80; i++) {
+    let conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.style.left = Math.random() * 100 + "vw";
+    conf.style.animationDuration = (Math.random() * 2 + 2) + "s";
+    document.body.appendChild(conf);
+  }
 }
 </script>
 
